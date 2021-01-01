@@ -1,6 +1,5 @@
 import { Button, Container, Dialog, DialogContent, LinearProgress } from '@material-ui/core';
 import { Add } from '@material-ui/icons';
-import { unwrapResult } from '@reduxjs/toolkit';
 import studentApi from 'api/studentApi';
 import React, { useContext, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -8,12 +7,12 @@ import ThemeContext from 'themeContext';
 import { getStudentList } from './actions';
 import StudentForm from './components/StudentForm';
 import StudentList from './components/StudentList';
-import { getRtkStudentList } from './studentSlice';
 
 function StudentFeature(props) {
   const studentList1 = useSelector((state) => state.students.list);
   const studentListLoading = useSelector((state) => state.students.loading);
   const dispatch = useDispatch();
+  console.log('Student List From Redux', { studentListLoading, studentList1 });
 
   const [filters, setFilters] = useState({
     _page: 1,
@@ -36,20 +35,6 @@ function StudentFeature(props) {
         setLoading(true);
         const action = getStudentList(filters);
         await dispatch(action);
-        setLoading(false);
-      } catch (error) {
-        console.log('Failed to fetch student list', error);
-      }
-    })();
-  }, [dispatch, filters]);
-
-  useEffect(() => {
-    (async () => {
-      try {
-        setLoading(true);
-        const action = getRtkStudentList(filters);
-        const resultAction = await dispatch(action);
-        unwrapResult(resultAction);
         setLoading(false);
       } catch (error) {
         console.log('Failed to fetch student list', error);
