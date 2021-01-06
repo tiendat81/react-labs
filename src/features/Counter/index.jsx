@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import { Button, Typography } from '@material-ui/core';
 import { useDispatch, useSelector } from 'react-redux';
 import { decrement, increment } from './counterSlice';
+import Counter1 from './Counter1';
+import Counter2 from './Counter2';
 
 CounterFeature.propTypes = {};
 
@@ -21,7 +23,10 @@ function CounterFeature(props) {
 
   return (
     <div>
-      <Typography component="h2" variant="h2">
+      <Counter1 />
+      <Counter2 />
+
+      {/* <Typography component="h2" variant="h2">
         {count}
       </Typography>
       <Button color="primary" onClick={handleDecreaseClick}>
@@ -29,7 +34,7 @@ function CounterFeature(props) {
       </Button>
       <Button color="primary" onClick={handleIncreaseClick}>
         Increase
-      </Button>
+      </Button> */}
     </div>
   );
 }
