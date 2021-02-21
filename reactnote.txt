@@ -1,0 +1,243 @@
+ReactJS Notes
+
+Buổi 1
+
+- for -> htmlFor
+- Nếu là component, đặt tên file .jsx, còn lại thì là .js (mục đích là để phân biệt đâu là component)
+- Optimize import: Alt Shift O trên Windows, Mac: Option Shift O
+- Quy ước Javasctip dùng single quote '', html: double quote ""
+- true, false is not rendered in UI
+- null, undefined is not rendered in UI
+- shift alt down arrow: copy line at bottom
+- create react-app hiện tại chỉ hỗ trợ node-sass 4 nhưng trang chủ đã là version 5 -> yarn add node-sass@^4
+- !! used for not a boolean (true or false) -> parse to truethy/falsethy
+- {true ? (jsx) : null}
+
+Buổi 2
+
+put change files to a temp stack `git add .`
+`git stash` -> put code to stack (dùng git lent to view)
+`git pull`
+`git checkout -b feature/lab1-jsx`
+`git stash pop` (lấy từ stash ra rồi xoá ngay)
+
+Format khi commit
+
+Lap 1 - JSX Introduction
+
+- what is JSX
+- render elements
+- conditional rendering
+- fragment
+
+
+Buổi 3
+
+- Trang nào có filter thì cơ bản sẽ có 2 phần chính: defaut filter và productList component
+
+Buổi 4
+
+- composition: cùng 1 component nhưng khi truyền props khác nhau thì sẽ hiển thị khác nhau 
+
+Buổi 6
+
+- children props: khi muốn tuỳ biến nội dung được hiển thị ở component con mà không quan tâm component cha truyền cái gì
+
+- interceptor axios: logic chung cho các request/response
+
+Buổi 7
+
+- Không có Switch thi sẽ render tất cả các route được match
+- Có Swith thì route đầu tiên thoả mãn sẽ được render
+- exact: url của user phải giống 100% với path được định nghĩa mới thoả
+- link có replay sẽ chặn đi về trang trước (ít được sử dụng)
+- return () => { // clearnup
+      // chạy trước khi useffect mới được chạy, hoặc component unmount
+      clearInterval(interval);
+    };
+- Lấy sau dấu ? trên đường dẫn dùng useLocation
+- Lấy tham số trên đường dẫn sau / dùng match (/:id)
+
+- life cycle component: 
+ + mounting, unmounting: chỉ làm 1 lần trong vòng đời
+ + updating: có thể xảy ra nhiều lần hoặc không có lần nào trong vòng đời
+- component vs pure component: chỉ khác nhau ở should component update
+- `should component update` luôn trả về true nên sẽ luôn được render
+- pure component sẽ xem props hoặc state có thay đổi gì không rồi mới render
+- component liên quan tới chart, đồ thị thì phải stricly xem nó render bao nhiêu lần - liên quan tới perfomance
+- component did update hiếm khi dùng (thường khi trong trường hợp với url nào thì component rerender)
+- react nó sẽ gom tất cả các thay đổi rồi mới render lên DOM 1 lần
+
+Buổi 10
+
+UI control: chỉ render, không cần biết state hay dữ liệu
+form chứa data liên quan tới tất cả dữ liệu của form: state,...
+form field (form control): cau noi
+
+- Hàm filter nó mặc định đã colone arr ra rồi nên không cần clone để cập nhật state nữa, nhưng đối với hàm splice thì sẽ cần phải clone ra trước rồi mới cập nhật
+
+- Bất cứ control nào cũng có 4 cái quan trọng này: (input field sẽ phải lấy từ todoform 4 giá trị sau)
+1 name
+2 value
+3 onChange
+4 onBlur
+
+- 1 control se la 1 field
+
+rule Form -> Field -> UI control
+
+1 field gom it nhat 3 thu:
+ - lable
+ - controler
+ - error message
+ 
+Buổi 11
+control component nghĩa là nó phụ thuộc vào cha, cha truyền cái gì nó render cái đó
+uncontrol component thi nguoc lai
+
+Buoi 12
+field là cầu nối trong gian để lấy thông tin từ form để đưa vào UI control
+
+
+Buoi 13
+Cors: 1 cai method: options se gui truoc de hoi xem server co cho truy cap khong, neu cho thi no moi gui api thu 2 len de update, con neu khong cho thi no cancel api thu 2 roif log ra loix CORS
+
+
+buoi
+function OptionField(props) {
+  const { name, label, form, disabled, options } = props;
+  const { errors } = form;
+  const errorMessage = errors[name]?.message;
+  const hasError = !!errorMessage;
+
+  const externalOnChange = props.onChange || (() => {}); // truyen function neu khong truyen props hoac bi null thi function khong lam gi ca
+
+Buoi 16
+1 app co the co nhieu context api (React support) - nhung kho quan ly
+moi khi context thay doi thi trigger thang con render lai
+
+
+nếu như xài redux thì hầu như không cần context api nữa
+nếu như app chưa xài redux và state global chạy ổn thì có thể không cần dùng redux
+
+Context api: 
+provide: thằng tạo ra giá trị
+consumer: thằng sử dụng
+
+Quy tắc dùng redux
+1. không phải cái gì cũng dùng redux, càng ít state càng tốt
+2. 
+
+
+action : object co it nhat la type, co the co payload(data) (chi co action va payload) thong qua dispatch
+chi co component nao subcribe state moi bi rerender (context thi se luon render khi state thay doi)
+state tren redux khong tu thay doi duoc, phai gui action gui len  store ve bien doi va tao ra state moi
+
+reducer la function de bien doi state tuong ung (state hien tai va action gui len)
+reducer doi voi object, array phai clone no ra truoc khi update state va phai return ve state moi
+
+redux persist: khi reload lai se van con da ta khong bi mat di
+
+action file dung de din nghia action creater
+
+react-redux la cau noi giua store voi app
+redux la thu vien quan ly state
+-----
+1 trang listing, 1detail, 1 add edit
+
+dompurify: render external html 
+
+* redux todo
+State:
+	- todoList : list
+	- todoFilter: filter
+
+Action: 
+	- list: add, edit, delete
+	- filer: setFilters()
+
+Reducers:
+
+
+action -> object
+async action -> function -> sau khi xu ly xong no se tra object vao reducer
+
+async action hien tai co 2: redux thunk, redux saga (saga viet theo js generator)
+
+* redux action (complex action)
+action khong chi dispatch tren reducer hien tai ma co the dispatch cac reducer khac
+
+khong nen xu ly error voi loading o tren redux, ma xy ly tren component thoi
+
+
+khong nen su dung handle error o intercepter (global loading), chi nen dung intercepter khi hien thong bao tren top
+né global loading, error loading tren reddux để tránh race condition
+
+
+thunkAPI getState nen ne khong nen xai vi state khi len toi day co the khong giong tren component
+extraReducers: la de tao custon action, co the tao bat cu action ten nao ma minh muon
+
+doc createSelector
+
+const fetchUserById = createAsyncThunk(
+  'users/fetchByIdStatus', // users:name: 'users' ,, fetchByIdStatus: ten function
+  async (userId, thunkAPI) => { // userId chinh la payload gui len
+    const response = await userAPI.fetchById(userId)
+    return response.data
+  }
+)
+
+// Then, handle actions in your reducers:
+const usersSlice = createSlice({
+  name: 'users',
+  initialState: { entities: [], loading: 'idle' },
+  reducers: {
+    // standard reducer logic, with auto-generated action types per reducer
+  },
+  extraReducers: {
+    // Add reducers for additional action types here, and handle loading state as needed
+    [fetchUserById.fulfilled]: (state, action) => { //[fetchUserById.fulfilled] co the dinh nghia bat ky la ten gi (string)
+      // Add user to the state array
+      state.entities.push(action.payload)
+    }
+  }
+})
+
+---
+Buoi 21
+batch update: react se gom nhieu thay doi roi moi gui len dom that
+reactjs khong tuong tac truc tiep voi dom that ma qua virtual dom
+
+useSelector: memo ket qua, neu tham so thay doi moi tinh toan lai
+
+dung useSelector der tinh toan ma khong can luu state tren redux (tinh toan dua tren ket qua suy dien)
+
+neu nhu nhieu feature cung xai thi tao folder duoi src cho hooks
+con neu chi dung trong feature thi tao trong feature/hooks
+
+// env
+phai bat dau REACT_APP_
+
+code spltiting - lazy load
+
+file duoi 100k kha on, 100 - 200kb bat dau cham cham, > 200 load cham
+
+app -> feature -> page thi can lazy load
+toi component level thi khong can lazyload nua
+
+Content-Encoding: gzip (network  tab on browser)  co gziip de giam kich thuoc (server config)
+
+---
+da ngon ngu:
+
+resources
+|__lgn
+  |__namespace
+
+
+trong truong hop co nhieu name space duoc dat trong mang thi phai chi dinh key do trong name space nao
+
+http://localhost:3000/todos?lng=vi // chuyen ngon ngu bang ?lng=vi
+
+const { t } = useTranslation(['common, 'todos]);
+<Typography variant="h2">{t('common:hello-world')}</Typography> // chi dinh namespace bang namespace:key
