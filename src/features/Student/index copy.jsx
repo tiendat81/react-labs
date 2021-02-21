@@ -27,7 +27,6 @@ function StudentFeature(props) {
   const [selectedStudent, setSelectedStudent] = useState(null);
 
   const { currentTheme: theme } = useContext(ThemeContext);
-  console.log({ theme });
 
   useEffect(() => {
     (async () => {

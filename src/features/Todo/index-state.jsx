@@ -11,7 +11,6 @@ function TodoFeature(props) {
   // Connect to redux store
   const todos = useSelector((state) => state.todos.list);
   const todosFilters = useSelector((state) => state.todos.filters);
-  console.log({ todos, todosFilters });
 
   const dispatch = useDispatch();
 

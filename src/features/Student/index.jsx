@@ -28,7 +28,6 @@ function StudentFeature(props) {
   const [selectedStudent, setSelectedStudent] = useState(null);
 
   const { currentTheme: theme } = useContext(ThemeContext);
-  console.log({ theme });
 
   useEffect(() => {
     (async () => {
@@ -79,6 +78,7 @@ function StudentFeature(props) {
       city: '',
       level: 'junior',
       avatar: '',
+      contacts: [],
       ...student,
     });
     setOpen(true);
