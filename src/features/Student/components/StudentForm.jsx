@@ -1,5 +1,6 @@
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Button, Typography } from '@material-ui/core';
+import ContactListField from 'components/FormFields/ContactListField';
 import InputField from 'components/FormFields/InputField';
 import OptionField from 'components/FormFields/OptionField';
 import RadioField from 'components/FormFields/RadioField';
@@ -42,6 +43,15 @@ function StudentForm({ initialValues, onSubmit }) {
       }),
     gender: yup.string(),
     city: yup.string(),
+
+    contacts: yup.array().of(
+      yup.object().shape({
+        name: yup.string().required('Please enter contact name.'),
+        phone: yup
+          .string()
+          .test('should-start-with-84', 'Please add +84', (value) => value.startsWith('+84')),
+      })
+    ),
   });
 
   const form = useForm({
@@ -53,17 +63,18 @@ function StudentForm({ initialValues, onSubmit }) {
       city: '',
       level: 'junior',
       avatar: '',
+      contacts: [],
     },
     resolver: yupResolver(schema),
   });
 
   const avatarUrl = form.watch('avatar');
-  console.log(avatarUrl);
 
   const handleFormSubmit = async (values) => {
-    if (onSubmit) {
-      await onSubmit(values);
-    }
+    console.log('Submit value', values);
+    // if (onSubmit) {
+    //   await onSubmit(values);
+    // } // lam xong thi enable submit nay len
   };
 
   const { isSubmitting } = form.formState;
@@ -98,6 +109,8 @@ function StudentForm({ initialValues, onSubmit }) {
           { value: 'hn', label: 'Hà Nội' },
         ]}
       />
+
+      <ContactListField name="contacts" label="Contact" form={form} />
 
       <OptionField
         name="level"

@@ -27,7 +27,7 @@ function App() {
     <div>
       <ThemeContext.Provider value={value}>
         <Header />
-        <Typography variant="h1">{seconds}</Typography>
+        {/* <Typography variant="h1">{seconds}</Typography> */}
 
         <Suspense fallback={<div>LOADING...</div>}>
           <Switch>

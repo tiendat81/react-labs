@@ -32,7 +32,6 @@ function MagicBoxFeature() {
 
   const handleBoxClick = (box, idx) => {
     // Remove box from list
-    console.log(box, idx);
     const newBoxList = [...boxList];
     newBoxList.splice(idx, 1);
 
