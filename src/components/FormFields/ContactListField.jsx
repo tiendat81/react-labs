@@ -40,6 +40,7 @@ function ContactListField(props) {
           </Typography>
 
           <InputField
+            // name: ten cua field, [idx]: vi tri cua no, .name: ten cua control
             name={`${name}[${idx}].name`}
             label="Full Name"
             defaultValue={field.name}
