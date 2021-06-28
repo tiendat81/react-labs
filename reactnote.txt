@@ -241,3 +241,6 @@ http://localhost:3000/todos?lng=vi // chuyen ngon ngu bang ?lng=vi
 
 const { t } = useTranslation(['common, 'todos]);
 <Typography variant="h2">{t('common:hello-world')}</Typography> // chi dinh namespace bang namespace:key
+
+luu state tren redux cang it cang tot, vi luu cang nhieu cang phai quan ly vi no la global ma global thi o dau cung co the cap nhat duoc
+va khi store to lên thi app se bắt đầu chậm chậm
